@@ -32,6 +32,8 @@ jobs:
           echo "The name of the pusher: ${{ github.event.pusher.name }}"
           echo "The email of the pusher: ${{ github.event.pusher.email }}"
       - name: Set pusher identity
-        run: GIT_AUTHOR_EMAIL="${{ github.event.pusher.email }}" && GIT_AUTHOR_NAME="${{ github.event.pusher.name }}"
+        run: | 
+          git config --global user.email "${{ github.event.pusher.email }}"
+          git config --global user.name "${{ github.event.pusher.name }}"
       - name: Git add, commit and push to test
         run: git add . && git commit -m "append to newFile.txt" && git push

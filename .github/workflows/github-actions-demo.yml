@@ -19,6 +19,7 @@ jobs:
         uses: actions/checkout@v2
         with: 
           fetch-depth: 0
+          token: ${{ secrets.PAT_TOKEN }}
       - name: Run run.sh
         run: ./.github/scripts/run.sh
         shell: bash

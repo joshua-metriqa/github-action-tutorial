@@ -18,4 +18,5 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v2
       - name: Run run.sh
-        run: ./run.sh
+        run: ./.github/scripts/run.sh
+        shell: bash

@@ -17,6 +17,14 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - name: Checkout the code
         uses: actions/checkout@v2
+        with: 
+          fetch-depth: 0
       - name: Run run.sh
         run: ./.github/scripts/run.sh
         shell: bash
+      - name: Checkout to test branch
+        run: git checkout test
+      - name: Append data to newFile.txt
+        run: echo "APPend me" >> newFile.txt
+      - name: Git add, commit and push to test
+        run: git add . && git commit -m "append to newFile.txt" && git push

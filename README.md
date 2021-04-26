@@ -4,4 +4,4 @@
     > git update-index --chmod=+x [file name]
 
 2. To skip workflow, add "skip ci" in comment:
-    > git commit -m "commenting things **skip ci**"
+    > git commit -m "commenting things **[skip ci]**"

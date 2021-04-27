@@ -1,0 +1,32 @@
+name: Build
+on: 
+  pull_request:
+  push:
+    branches: [ viteCI ]
+    paths-ignore:
+      - 'README.md'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build and Push
+    steps:
+      - name: git-checkout
+        uses: actions/checkout@v2
+
+      - name: Install all dependencies
+        working-directory: ./vite-project
+        run: npm install
+
+      - name: Build
+        working-directory: ./vite-project
+        run: npm run build 
+    
+      - name: Push
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          REPO: self
+          BRANCH: deploy-vite # The branch name where you want to push the assets
+          FOLDER: ./vite-project/dist # The directory where your assets are generated
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
+          MESSAGE: "Build: ({sha}) {msg}" # The commit message
+  
